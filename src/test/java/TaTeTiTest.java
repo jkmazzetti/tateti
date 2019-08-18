@@ -16,7 +16,7 @@ public class TaTeTiTest {
 	public void before(){
 		miJuego = new TaTeTi();
 	}
-
+	
 	@Test
 	public void ganaXenDiagonalPrincipal(){
 		assertFalse(miJuego.huboGanador());
