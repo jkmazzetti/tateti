@@ -13,7 +13,7 @@ public class TaTeTiTest {
 	TaTeTi miJuego;
 
 	@Before
-	public void before() throws Exception {
+	public void before(){
 		miJuego = new TaTeTi();
 	}
 
