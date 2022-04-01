@@ -1,11 +1,20 @@
 package main.java;
 
+import java.util.Scanner;
+
 public class TaTeTi {
 	private String x = "X", o = "O", jActual = x, tablero[][] = new String[3][3];
 
 	public TaTeTi() {
 		estadoInicial();
-		dibujar();
+		//Descomentar para jugar:
+		/*
+		while(!huboGanador()) {
+
+			dibujar();
+			marcar();
+		}
+		*/
 	}
 
 	/**
@@ -62,8 +71,27 @@ public class TaTeTi {
 	 * (x >= 0 && x < 3) && (y >= 0 && y < 3)
 	 * 
 	 */
+	public void marcar() {
+		Scanner input = new Scanner(System.in);  // Create a Scanner object
+	    System.out.println("ingrese fila y columna ejemplo 0;0:\n");
+	    String seleccion = input.nextLine();
+	    String[] casillero = (seleccion.toString()).split(";");
+	    int x=Integer.parseInt(casillero[0]);
+	    int y=Integer.parseInt(casillero[1]);
+		if (!todoOcupado() && !huboGanador() && x<=2 && x>=0 && y<=2 && y>=0) {
+			if (tablero[x][y] == "-") {
+				tablero[x][y] = obtenerJugadorActual();
+				dibujar();
+				cambiarTurno();
+			} else {
+				System.out.println("Espacio ocupado por: " + tablero[x][y]);
+			}
+		}
+
+	}
+	
 	public void marcar(int x, int y) {
-		if (!todoOcupado() && !huboGanador()) {
+		if (!todoOcupado() && !huboGanador() && x<=2 && x>=0 && y<=2 && y>=0) {
 			if (tablero[x][y] == "-") {
 				tablero[x][y] = obtenerJugadorActual();
 				dibujar();
@@ -107,11 +135,11 @@ public class TaTeTi {
 		}
 
 		if (huboGanador()) {
-			System.out.println("\nGanó: " + this.jActual);
+			System.out.println("\nGanï¿½: " + this.jActual);
 		}
 
 		if (!huboGanador() && todoOcupado()) {
-			System.out.println("\nTerminó el juego y no hubo ganador.");
+			System.out.println("\nTerminï¿½ el juego y no hubo ganador.");
 		}
 		System.out.println("\n\n\n");
 	}
@@ -120,14 +148,15 @@ public class TaTeTi {
 	 * Tablero al iniciar
 	 */
 	public void estadoInicial() {
-		this.tablero[0][0] = "-";
-		this.tablero[0][1] = "-";
-		this.tablero[0][2] = "-";
-		this.tablero[1][0] = "-";
-		this.tablero[1][1] = "-";
-		this.tablero[1][2] = "-";
-		this.tablero[2][0] = "-";
-		this.tablero[2][1] = "-";
-		this.tablero[2][2] = "-";
+		for(int i=0; i<tablero.length;i++) {
+			for(int j=0;j<tablero[i].length;j++) {
+				tablero[i][j]="-";
+			}
+		}
 	}
+	
+
+public static void main(String[]args) {
+	TaTeTi nuevo = new TaTeTi();
+}	
 }
